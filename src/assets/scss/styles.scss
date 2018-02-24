@@ -4,6 +4,17 @@ body{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background: $bg-color;
     
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    img{
+        width: 60%;
+        margin-left: 60px;
+    }
+    p{
+        text-align: center;
+    }
 }

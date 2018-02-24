@@ -35,13 +35,13 @@ gulp.task('script', function(){
     gulp.src('src/assets/js/*.js')
         .pipe(concat('main.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('dist/assests/js'))
+        .pipe(gulp.dest('dist/assets/js'))
 })
 
 gulp.task('sass', function(){
     return gulp.src('src/assets/scss/*.scss')
             .pipe(sass().on('error', sass.logError))
-            .pipe(gulp.dest('dist/css/'))
+            .pipe(gulp.dest('dist/assets/css/'))
             .pipe(browserSync.reload({
                 stream: true
               }))
