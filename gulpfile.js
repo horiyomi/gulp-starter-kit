@@ -2,8 +2,17 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const imagemin = require('gulp-imagemin');
 const uglify = require('gulp-uglify');
-const concat = require('gulp-concat')
+const concat = require('gulp-concat');
+const browserSync = require('browser-sync').create();
 
+
+gulp.task('browserSync', function() {
+    browserSync.init({
+      server: {
+        baseDir: 'src'
+      },
+    })
+  })
 
 gulp.task('makeCopy', function(){
     return gulp.src('src/*.html')
@@ -33,6 +42,9 @@ gulp.task('sass', function(){
     return gulp.src('src/assets/scss/*.scss')
             .pipe(sass().on('error', sass.logError))
             .pipe(gulp.dest('dist/css/'))
+            .pipe(browserSync.reload({
+                stream: true
+              }))
 });
 
 
@@ -40,7 +52,7 @@ gulp.task('sass', function(){
 gulp.task('default', ['makeCopy', 'imagemin', 'sass', 'script'])
 
 
-gulp.task('watch',function(){
+gulp.task('watch',['browserSync', 'sass'],function(){
     gulp.watch('src/assets/js/*.js', ['script']);
     gulp.watch('src/assets/sass/*.js', ['sass']);
     gulp.watch('src/assets/img/*', ['imagemin']);
